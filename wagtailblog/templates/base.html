@@ -1,0 +1,110 @@
+{% load wagtailcore_tags %}
+{% load static wagtailuserbar %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="{% block description %}{% endblock %}" />
+    <meta name="keywords" content="{% block keywords %}{% endblock %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>
+        {% block title %}
+            {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+        {% endblock %}
+        {% block title_suffix %}
+            | {{ website_name }}
+        {% endblock %}
+    </title>
+
+    {# Global stylesheets #}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    {% comment %}<link rel="icon" href="{% static '../media/favicon/favicon.ico' %}" />{% endcomment %}
+    <link rel="icon" href="{{ website_favicon }}" />
+    <noscript><link rel="stylesheet" href="{% static 'css/noscript.css' %}" /></noscript>
+
+    {% block extra_css %}
+        {# Override this in templates to add extra stylesheets #}
+    {% endblock %}
+  </head>
+  <body>
+    {# provides a contextual flyout menu for logged-in users #}
+    {% wagtailuserbar 'bottom-left' %}
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+    <!-- Header -->
+    {% block header %}
+    <header id="header">
+      <div class="inner">
+          <!-- Logo -->
+          <a href="/" class="logo top">
+            <span class="symbol"><img src="{{ website_logo.file.url }}" alt="{{ website_logo.title }}" /></span><span class="title">{{ website_name }}</span>
+          </a>
+        <!-- Nav -->
+        <nav>
+          <ul>
+            <li><a href="#menu">Menu</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    {% endblock %}
+
+    <!-- Menu -->
+    {% block menu %}
+    <nav id="menu">
+      <!-- Search box -->
+      <form action="{% url 'search' %}" method="get" class="top">
+        <input class="icon" type="text" placeholder="&#61442;" name="q"{% if search_query %} value="{{ search_query }}"{% endif %}/>
+        <!--<input type="submit" value="Search" class="button">-->
+      </form>
+      <h2>Meny</h2>
+      <ul>
+        <li><a href="/">Hem</a></li>
+        <li><a href="{% slugurl 'blog' %}">Blogg</a></li>
+      </ul>
+    </nav>
+    {% endblock %}
+
+    <!-- Main -->
+    {% block content %}
+      {# Override this in templates to add the content of the page #}
+    {% endblock %}
+
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="inner">
+        <section>
+          <h2>Om {{ website_name }}</h2>
+            {{ website_footer|richtext }}
+        </section>
+        <section>
+          <h2>Följ på Instagram</h2>
+          <ul class="icons">
+            <li><a href="{{ website_instagram }}" class="icon style2 shrink fa fa-instagram fa-2x"><span class="label">Instagram</span></a></li>
+          </ul>
+        </section>
+        <ul class="copyright">
+          <li><i class="fa fa-copyright fa-lg" aria-hidden="true"></i> <span id="copyright">{{ website_name }}</span></li>
+        </ul>
+      </div>
+    </footer>
+
+    </div>
+
+    {# Global javascript #}
+    <script src="{% static 'js/breakpoints.min.js' %}"></script>
+    <script src="{% static 'js/browser.min.js' %}"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/utils.js' %}"></script>
+
+    {% block extra_js %}
+        {# Override this in templates to add extra javascript #}
+    {% endblock %}
+  </body>
+</html>

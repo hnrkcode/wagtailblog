@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags  %}
+{% load wagtailimages_tags %}
+
+{% block description %}{% if description %}{{ description }}{% endif %}{% endblock %}
+{% block keywords %}{{ keywords|join:", " }}{% endblock %}
+
+{% block title %}
+  {% if object.seo_title %}
+    {{ object.seo_title }}
+  {% else %}
+    {{ object.title }}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<header id="headerimage" style="background-image: url('{{ header_image }}');">
+  <div class="inner">
+    <h1 id="pageheader">{{ title }}</h1>
+    {{ header_text|richtext }}
+  </div>
+</header>
+  <div id="main">
+    <div class="inner">
+      <div class="tiles">
+        {% for post in object_list %}
+        <article class="style1">
+          <span class="image">
+          {% if post.specific.featured_image %}
+            {% image post.specific.featured_image fill-353x326 %}
+          {% else %}
+            <img src="{{ default_preview }}" alt="default" width="353" height="326">
+          {% endif %}
+          </span>
+          <a href="{% pageurl post %}">
+            <h3>{{ post.specific.title }}</h3>
+            <div class="content">
+              <p>{{ post.specific.intro_text }}</p>
+            </div>
+          </a>
+        </article>
+        {% endfor %}
+      </div>
+      {% if is_paginated %}
+      <div class="pagination">
+        {% if page_obj.has_previous %}
+        <div id="pagination_previous"><a href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-angle-left"></i> Nyare inlägg</a></div>
+        {% endif %}
+        {% if page_obj.has_next %}
+        <div id="pagination_next"><a href="?page={{ page_obj.next_page_number }}">Äldre inlägg <i class='fa fa-angle-right'></i></a></div>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

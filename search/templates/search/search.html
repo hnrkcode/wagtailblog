@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags  %}
+{% load wagtailimages_tags %}
+
+{% block description %}{% if search_query %}Sök resultat på {{ website_name }} för '{{ search_query }}'{% endif %}{% endblock %}
+
+{% block keywords %}{{ search_query }}{% endblock %}
+
+{% block title %}{{ search_query }}{% endblock %}
+
+{% block content %}
+<div id="main">
+  <div class="inner">
+    <h1>Sök blogginlägg</h1>
+    <!-- Search box -->
+    <form action="{% url 'search' %}" method="get" class="top">
+      <input class="searchpage icon" type="text" placeholder="&#61442;" name="q" {% if search_query %} value="{{ search_query }}"{% endif %}/>
+    </form>
+    {% if search_results %}
+    <h3>Sökresultat</h3>
+    <p class="search_result">Hittade {{ search_hits }} inlägg som matchade "{{ search_query }}".</p>
+    <div class="tiles">
+      {% for result in search_results %}
+      <article class="style1">
+        <span class="image">
+        {% if result.featured_image %}
+          {% image result.featured_image fill-353x326 %}
+        {% else %}
+          <img src="{{ default_preview }}" alt="default" width="353" height="326">
+        {% endif %}
+        </span>
+        <a href="{% pageurl result %}">
+          <h3>{{ result.title }}</h3>
+          <div class="content">
+            <p>{{ result.intro_text }}</p>
+          </div>
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+    <div class="pagination">
+      {% if search_results.has_previous %}
+        <div id="pagination_previous">
+          <a href="{% url 'search' %}?q={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Föregående</a>
+        </div>
+      {% endif %}
+      {% if search_results.has_next %}
+        <div id="pagination_next">
+          <a href="{% url 'search' %}?q={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Nästa</a>
+        </div>
+      {% endif %}
+    </div>
+    {% elif search_query %}
+      <p>Tyvärr hittade inget inlägg som innehåller "{{ search_query }}".</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

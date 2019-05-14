@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
+{% block description %}{% if object.description %}{{ object.description }}{% endif %}{% endblock %}
+{% block keywords %}{{ object.keywords.all|join:", " }}{% endblock %}
+
+{% block title %}
+  {% if object.seo_title %}
+    {{ object.seo_title }}
+  {% else %}
+    {{ object.title }}
+  {% endif %}
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/gallery.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/gallery.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+        <header>
+          {% if object.featured_image %}
+            {% image object.featured_image fill-1920x540 as header %}
+            <img src="{{ header.url }}" alt="{{ header.alt }}" style="width: 100%;">
+            {% else %}
+            <img src="{{ default_feature }}" alt="default" style="width: 100%;">
+          {% endif %}
+        </header>
+        <div id="main">
+          <div class="inner">
+            <h1>{{ object.title }}</h1>
+            <div class="date">
+              <p class="meta">{{ object.date.date }}
+                {% if object.first_published_at.date != object.last_published_at.date %}
+                <i>(Uppdaterad: {{ object.last_published_at.date }})</i>
+                {% endif %}
+              </p>
+            </div>
+            <div class="content">
+              {{ object.text|richtext }}
+
+              {% if object.show %}
+              <!--Lightbox gallery-->
+              <div class="gallery">
+                <!-- Images used to open the lightbox -->
+                <div class="row">
+                  {% for img in object.gallery_images.all %}
+                  <div class="column">
+                    {% image img.image fill-320x240 as item %}
+                    <img src="{{ item.url }}" alt="{{ item.alt }}" onclick="openModal();currentSlide({{ forloop.counter }})" class="hover-shadow">
+                  </div>
+                  {% endfor %}
+                </div>
+                <!-- The Modal/Lightbox -->
+                <div id="myModal" class="modal">
+                  <div class="modal-content">
+
+                    {% for gallery in object.gallery_images.all %}
+                    <div class="mySlides">
+                      <div class="numbertext">{{ forloop.counter }} / {{ object.gallery_images.all|length }}</div>
+                      {% image gallery.image width-1080 as photo %}
+                      {% if photo.height > photo.width or photo.height == photo.width %}
+                      <img src="{{ photo.url }}" alt="{{ photo.alt }}" style="width:45%; display: block; margin-left:auto; margin-right:auto;">
+                      {% else %}
+                      <img src="{{ photo.url }}" alt="{{ photo.alt }}" style="width:100%">
+                      {% endif %}
+                      <p class="caption">{{ gallery.caption }}</p>
+                    </div>
+                    {% endfor %}
+
+                    <!--Close button-->
+                    <span class="close cursor" onclick="closeModal()"><i class="fa fa-times" aria-hidden="true"></i></span>
+                    <!-- Next/previous controls -->
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+
+            </div>
+
+          {% if object.tags.all.count %}
+          <div class="tags blogpost">
+
+              {% for tag in object.tags.all %}
+                  <a href="{% slugurl 'tags' %}?tag={{ tag }}">#{{ tag }}</a>
+              {% endfor %}
+
+          </div>
+          {% endif %}
+
+          {% if object.next_post %}
+            <div id="next"><a href="{% slugurl object.next_post.slug %}"><i class="fa fa-angle-left"></i> Nyare inlägg</a></div>
+          {% endif %}
+          {% if object.previous_post %}
+            <div id="previous"><a href="{% slugurl object.previous_post.slug %}">Äldre inlägg <i class="fa fa-angle-right"></i></a></div>
+          {% endif %}
+          </div>
+        </div>
+{% endblock %}

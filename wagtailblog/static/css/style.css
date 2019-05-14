@@ -1,0 +1,284 @@
+/* Colors */
+
+a.logo.top:hover {
+  color: #585858 !important;
+}
+
+a,
+p > a,
+li > a {
+  color: #267A8D;
+  font-weight: bold;
+  outline: 0;
+  border: none;
+}
+
+a:hover,
+p > a:hover,
+li > a:hover {
+  color: #90BBC5 !important;
+}
+
+.tags > a,
+#previous > a,
+#next > a,
+#pagination_previous > a,
+#pagination_next > a {
+    color: white;
+    background-color: #267A8D;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    border-radius: 5px;
+}
+
+.tags > a:hover,
+#previous > a:hover,
+#next > a:hover,
+#pagination_previous > a:hover,
+#pagination_next > a:hover {
+    color: white !important;
+    background-color: #90BBC5;
+}
+
+/* Footer color */
+#footer,
+#footer > * > * > li {
+    background-color: #B8CF99 !important;
+    color: white;
+}
+
+/* Homepage */
+
+.homepage.title {
+  text-align: center;
+  margin-top: 4.5em;
+  margin-bottom: -2em;
+}
+
+.lightwidget-widget {
+  padding-left: 4%;
+  width: 100% !important;
+}
+
+/* Header on homepage */
+
+#headerimage {
+  padding: 15% 0 2% 0;
+  margin-bottom: 5%;
+  color: #ffffff;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#headerimage > * > h1 {
+  margin-bottom: 3%; /* less space between header and text */
+}
+
+#headerimage > * > .rich-text,
+#headerimage > * > * > .rich-text,
+#headerimage > * > h1 {
+  text-shadow: 1px 1px 3px #000000;
+}
+
+#header {
+    padding: 2em 0.1em 0 !important; /* Remove space at the top of the page */
+}
+
+/* Footer */
+
+#copyright {
+  font-size: 1.33333333em;
+  line-height: .75em;
+  vertical-align: -15%;
+}
+
+/* Instagram buttom hover effect */
+
+.shrink {
+  transition: 0.5s ease !important;
+}
+
+.shrink:hover {
+  -webkit-transform: scale(0.8) !important;
+  -ms-transform: scale(0.8) !important;
+  transform: scale(0.8) !important;
+  transition: 0.5s ease !important;
+}
+
+.icon.style2 {
+  border: solid 0px #ffffff !important;
+  border-radius: 0px !important;
+  width: 100% !important;
+  height: 100% !important;
+  line-height: 0em !important;
+}
+
+.icon.style2:hover {
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+}
+
+/* Menu */
+
+#header nav ul li a[href="#menu"]:before {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cstyle%3Eline %7B stroke-width: 8px%3B stroke: %2390BBC5%3B %7D%3C/style%3E%3Cline x1='0' y1='25' x2='100' y2='25' /%3E%3Cline x1='0' y1='50' x2='100' y2='50' /%3E%3Cline x1='0' y1='75' x2='100' y2='75' /%3E%3C/svg%3E") !important;
+}
+
+#header nav ul li a[href="#menu"]:after {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cstyle%3Eline %7B stroke-width: 8px%3B stroke: %23267A8D%3B %7D%3C/style%3E%3Cline x1='0' y1='25' x2='100' y2='25' /%3E%3Cline x1='0' y1='50' x2='100' y2='50' /%3E%3Cline x1='0' y1='75' x2='100' y2='75' /%3E%3C/svg%3E") !important;
+}
+
+#menu > .close:before {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cstyle%3Eline %7B stroke-width: 8px%3B stroke: %2390BBC5%3B %7D%3C/style%3E%3Cline x1='15' y1='15' x2='85' y2='85' /%3E%3Cline x1='85' y1='15' x2='15' y2='85' /%3E%3C/svg%3E") !important;
+}
+
+#menu > .close:after {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cstyle%3Eline %7B stroke-width: 8px%3B stroke: %23267A8D%3B %7D%3C/style%3E%3Cline x1='15' y1='15' x2='85' y2='85' /%3E%3Cline x1='85' y1='15' x2='15' y2='85' /%3E%3C/svg%3E") !important;
+}
+
+#menu {
+    background-color: #267A8D !important;
+}
+
+/* Tiles */
+
+.tiles article.style1 > .image::before {
+    background-color: #267A8D !important;
+}
+
+.tiles article a:hover {
+  background-color: rgb(0, 0, 0, 0.5) !important;
+  transform: scale(1.1) !important;
+}
+
+/* No cross over image */
+.tiles article > .image:after {
+    background-image: None !important;
+  }
+
+/* Pagination */
+
+#next,
+#previous,
+.tags,
+.pagination {
+  font-weight: bold;
+}
+
+.pagination {
+  padding-top: 3em; /* Lower pagination links on blog page*/
+}
+
+/* Pagination next/previous links on single post */
+#next {
+  float: left;
+}
+
+#previous {
+  float: right;
+}
+
+/* Pagination next/previous links on blog page */
+#pagination_next {
+  float: right;
+}
+
+#pagination_previous {
+  float: left;
+}
+
+/* Search */
+
+.top {
+  display: inline;
+}
+
+input.icon {
+    border: solid 2px #CCCCCC !important;
+    font-size: 16px !important;
+    -webkit-transition: width 0.5s ease-in-out !important;
+    transition: width 0.5s ease-in-out !important;
+    padding: 15px !important;
+    margin-bottom: 1em !important;
+    border-radius: 10px !important;
+}
+
+input.icon:focus {
+    border: solid 2px #729FCF !important;
+    box-shadow: inset 0 0 0 0 !important;
+}
+
+input.icon::-webkit-input-placeholder {
+    font-family:'FontAwesome';
+}
+
+input.icon::-moz-placeholder {
+    font-family:'FontAwesome';
+}
+
+input.icon::-ms-input-placeholder {
+    font-family:'FontAwesome';
+}
+
+/* Tag page */
+
+p#empty {
+  margin-left: 2.5em !important;
+}
+
+/* Tags on blog post */
+.tags {
+  margin-left: 2.5em !important;
+  line-height: 2.6em;
+}
+
+.blogpost {
+  padding-top: 2em;
+  padding-bottom: 2em;
+  margin: 0 !important;
+}
+
+/* Narrower width of content */
+#wrapper > * > .inner {
+    max-width: 60em !important;
+}
+
+/* For screens with 736px and and smaller: */
+@media screen and (max-width: 736px) {
+  h1, h2, h3, .meta, .tags, .search_result, #homepage, #footer > div.inner {
+    text-align: center !important;
+  }
+  .rich-text img {
+    width: 100%;
+    height: auto;
+  }
+  .title {
+    font-size: 0.7em !important;
+  }
+  #pageheader, .tag h1 {
+    font-size: 1.2em !important;
+  }
+  #footer > div.inner > section > h2 {
+    font-size: 0.9em !important;
+  }
+  body:not(.is-touch) .tiles article > .image {
+    -moz-transform: scale(1.0) !important;
+    -webkit-transform: scale(1.0) !important;
+    -ms-transform: scale(1.0) !important;
+    transform: scale(1.0) !important;
+  }
+  body:not(.is-touch) .tiles article > .image:before {
+    background-color: #333333 !important;
+    opacity: 0.35 !important;
+  }
+  body:not(.is-touch) .tiles article .content {
+    max-height: 15em;
+    opacity: 1;
+  }
+  .tiles article a {
+    background-color: rgb(0, 0, 0, 0.5) !important;
+    transform: scale(1) !important;
+  }
+  .tiles article a:hover {
+    transform: scale(1) !important;
+  }
+}

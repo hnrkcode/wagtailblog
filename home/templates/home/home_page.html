@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
+{% block description %}{% if page.description %}{{ page.description }}{% endif %}{% endblock %}
+{% block keywords %}{{ page.keywords.all|join:", " }}{% endblock %}
+
+{% block content %}
+    <header id="headerimage" style="background-image: url('{{ homepage_header_image }}');">
+      <div class="inner">
+        <h1 id="pageheader">{{ page.header_header }}</h1>
+        {{ page.header_body|richtext }}
+      </div>
+    </header>
+    <section class="homepage title">
+      <h2>Senaste inläggen</h2>
+    </section>
+    <div id="main">
+      <div class="inner">
+        <div class="tiles">
+          {% for post in latest_posts %}
+          <article class="style1">
+            <span class="image">
+            {% if post.specific.featured_image %}
+              {% image post.specific.featured_image fill-353x326 %}
+            {% else %}
+              <img src="{{ default_preview }}" alt="default" width="353" height="326">
+            {% endif %}
+            </span>
+            <a href="{% pageurl post %}">
+              <h3>{{ post.specific.title }}</h3>
+              <div class="content">
+                <p>{{ post.specific.intro_text }}</p>
+              </div>
+            </a>
+          </article>
+          {% endfor %}
+        </div>
+        {% if show_widget %}
+        <section class="homepage title">
+          <h2>Instagram</h2>
+        </section>
+        <div class="instagram tiles">
+          {{ instagram_widget|safe }}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+{% endblock %}
