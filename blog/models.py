@@ -185,23 +185,3 @@ class BlogPostGalleryImage(Orderable):
         ImageChooserPanel('image'),
         FieldPanel('caption'),
     ]
-
-
-class TagPage(Page):
-    """Model for the tag index page"""
-
-    def get_tags(self):
-        # BUG: also shows tags from posts that aren't live.
-        tags = BlogPost.tags.all()
-        return tags
-
-    def get_context(self, request):
-        # Filter by tag
-        tag = request.GET.get('tag')
-        blogposts = BlogPost.objects.live().filter(tags__name=tag)
-        # Update template context
-        context = super().get_context(request)
-        context['blogposts'] = blogposts
-        context['all_tags'] = BlogPost.tags.all()
-
-        return context

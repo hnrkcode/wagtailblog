@@ -35,3 +35,18 @@ class BlogPostView(DetailView):
     def get_queryset(self):
         return BlogPost.objects.live().filter(
             date__lte=timezone.now()).order_by("-date")
+
+
+class TagPageView(ListView):
+    model = BlogPost
+    template_name = 'blog/tag_page.html'
+    paginate_by = 12
+
+    def get_queryset(self):
+        return BlogPost.objects.filter(tags__name__iexact=self.kwargs['tag'])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['current_tag'] = self.kwargs['tag']
+        context['all_tags'] = BlogPost.tags.all()
+        return context

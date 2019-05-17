@@ -90,17 +90,17 @@
           <div class="tags blogpost">
 
               {% for tag in object.tags.all %}
-                  <a href="{% slugurl 'tags' %}?tag={{ tag }}">#{{ tag }}</a>
+                  <a href="{% url 'blog:tagpage' tag %}">#{{ tag }}</a>
               {% endfor %}
 
           </div>
           {% endif %}
 
           {% if object.next_post %}
-            <div id="next"><a href="{% slugurl object.next_post.slug %}"><i class="fa fa-angle-left"></i> Nyare inlägg</a></div>
+            <div id="next"><a href="{% url 'blog:blogpost' object.next_post.slug %}"><i class="fa fa-angle-left"></i> Nyare inlägg</a></div>
           {% endif %}
           {% if object.previous_post %}
-            <div id="previous"><a href="{% slugurl object.previous_post.slug %}">Äldre inlägg <i class="fa fa-angle-right"></i></a></div>
+            <div id="previous"><a href="{% url 'blog:blogpost' object.previous_post.slug %}">Äldre inlägg <i class="fa fa-angle-right"></i></a></div>
           {% endif %}
           </div>
         </div>

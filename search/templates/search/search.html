@@ -29,7 +29,7 @@
           <img src="{{ default_preview }}" alt="default" width="353" height="326">
         {% endif %}
         </span>
-        <a href="{% pageurl result %}">
+        <a href="{% url 'blog:blogpost' result.slug %}">
           <h3>{{ result.title }}</h3>
           <div class="content">
             <p>{{ result.intro_text }}</p>

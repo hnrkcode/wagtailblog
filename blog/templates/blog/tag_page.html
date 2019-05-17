@@ -7,39 +7,35 @@
 {% block keywords %}{% if request.GET.tag|length %}{{ request.GET.tag }}{% endif %}{% endblock %}
 
 {% block content %}
-    <div id="main">
-      <div class="inner tag">
-      {% if request.GET.tag|length >= 1 %}
-        <h1>Sidor taggade med "{{ request.GET.tag }}"</h1>
-      {% else %}
-        <h1>Taggar</h1>
-      {% endif %}
-        <div class="tiles">
-          {% for post in blogposts %}
-          <article class="style1">
-            <span class="image">
-            {% if post.specific.featured_image %}
-              {% image post.specific.featured_image fill-353x326 %}
-            {% else %}
-              <img src="{{ default_preview }}" alt="default" width="353" height="326">
-            {% endif %}
-            </span>
-            <a href="{% pageurl post %}">
-              <h3>{{ post.specific.title }}</h3>
-              <div class="content">
-                <p>{{ post.specific.intro_text }}</p>
-              </div>
-            </a>
-          </article>
-          {% empty %}
-            <p id="empty">Hittade tyvärr inga taggade inlägg. Testa någon av taggarna nedanför istället.</p>
-              <div class="tags">
-                  {% for tag in all_tags %}
-                    <a href="{% slugurl 'tags' %}?tag={{ tag }}">#{{ tag }}</a>
-                  {% endfor %}
-              </div>
-          {% endfor %}
-        </div>
-      </div>
+<div id="main">
+  <div class="inner tag">
+    <h1>Inlägg taggade med "{{ current_tag }}"</h1>
+    <div class="tiles">
+      {% for post in object_list %}
+      <article class="style1">
+        <span class="image">
+        {% if post.specific.featured_image %}
+          {% image post.specific.featured_image fill-353x326 %}
+        {% else %}
+          <img src="{{ default_preview }}" alt="default" width="353" height="326">
+        {% endif %}
+        </span>
+        <a href="{% url 'blog:blogpost' post.slug %}">
+          <h3>{{ post.specific.title }}</h3>
+          <div class="content">
+            <p>{{ post.specific.intro_text }}</p>
+          </div>
+        </a>
+      </article>
+      {% empty %}
+        <p id="empty">Hittade tyvärr inga taggade inlägg. Testa någon av taggarna nedanför istället.</p>
+          <div class="tags">
+              {% for tag in all_tags %}
+                <a href="{% url 'blog:tagpage' tag %}">#{{ tag }}</a>
+              {% endfor %}
+          </div>
+      {% endfor %}
     </div>
+  </div>
+</div>
 {% endblock %}
