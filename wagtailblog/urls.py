@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib import admin
-#re_pathfrom django.conf.urls import include, url
+from django.urls import re_path, include
 
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
@@ -9,12 +9,13 @@ from wagtail.documents import urls as wagtaildocs_urls
 from search import views as search_views
 
 # view 404 in development, remove in production
-from django.urls import path, re_path, include
 from django.views.defaults import page_not_found
+
 
 # view 404 in development, remove in production
 def custom_page_not_found(request):
     return page_not_found(request, None)
+
 
 urlpatterns = [
     re_path(r'^django-admin/', admin.site.urls),
@@ -24,7 +25,7 @@ urlpatterns = [
     re_path(r'^blog/', include('blog.urls')),
 
     # view 404 in development, remove in production
-    path('404/', custom_page_not_found),
+    re_path(r'^404/$', custom_page_not_found),
 
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in

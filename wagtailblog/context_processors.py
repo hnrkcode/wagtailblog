@@ -2,6 +2,7 @@ import os
 from home.models import HomePage
 from wagtailblog.settings.base import STATIC_URL
 
+
 def globals(request):
     """Defines global context variables for all templates."""
 
@@ -24,12 +25,17 @@ def globals(request):
 
     return context
 
+
 def default_images(request):
     """Default images for preview and feature images"""
 
     context = {
-        'default_preview': os.path.join(STATIC_URL, 'images/default_feature_preview_image.jpg'),
-        'default_feature': os.path.join(STATIC_URL, 'images/default_feature_image.jpg'),
+        'default_preview': os.path.join(
+            STATIC_URL, 'images/default_feature_preview_image.jpg'
+        ),
+        'default_feature': os.path.join(
+            STATIC_URL, 'images/default_feature_image.jpg'
+        ),
     }
 
     return context

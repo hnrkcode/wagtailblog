@@ -44,7 +44,8 @@ class TagPageView(ListView):
     paginate_by = 12
 
     def get_queryset(self):
-        return BlogPost.objects.live().filter(tags__name__iexact=self.kwargs['tag'])
+        return BlogPost.objects.live().filter(
+            tags__name__iexact=self.kwargs['tag'])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
