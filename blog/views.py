@@ -1,3 +1,4 @@
+import re
 from django.utils import timezone
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -43,10 +44,14 @@ class TagPageView(ListView):
     paginate_by = 12
 
     def get_queryset(self):
-        return BlogPost.objects.filter(tags__name__iexact=self.kwargs['tag'])
+        return BlogPost.objects.live().filter(tags__name__iexact=self.kwargs['tag'])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['current_tag'] = self.kwargs['tag']
+        context['current_tag'] = self.unslugify(self.kwargs['tag'])
         context['all_tags'] = BlogPost.tags.all()
         return context
+
+    def unslugify(self, slug):
+        """Convert slug to string."""
+        return re.sub('-', ' ', slug)

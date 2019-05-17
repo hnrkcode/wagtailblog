@@ -90,7 +90,7 @@
           <div class="tags blogpost">
 
               {% for tag in object.tags.all %}
-                  <a href="{% url 'blog:tagpage' tag %}">#{{ tag }}</a>
+                  <a href="{% url 'blog:tagpage' tag|slugify %}">#{{ tag }}</a>
               {% endfor %}
 
           </div>
